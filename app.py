@@ -1,6 +1,6 @@
-#mahim EMOTE EQUIP
+#RIZER EMOTE EQUIP
 #EQUIPS HI EMOTE FOR GUEST IDS
-# MADE BY mahim
+# MADE BY RIZER
 # FUCK YOU IF YOU TAKE MY CREDIT
 # LEAK_OB53
 import base64
@@ -50,8 +50,8 @@ BASE_HEADERS = {
     "X-Unity-Version": "2018.4.11f1",
 }
 
-OWNER_mahim = " made by mahim_offcial_143✅"
-MADE_BY_mahim = "mahim🌃🆗"
+OWNER_SIGNATURE = " made by RIZERx64✅"
+MADE_BY_SIGNATURE = "RIZER🌃🆗"
 
 OAUTH_URL = "https://100067.connect.garena.com/oauth/guest/token/grant"
 MAJOR_LOGIN_URL = "https://loginbp.ggblueshark.com/MajorLogin"
@@ -364,8 +364,8 @@ def build_response(success, region, status_code, body, error_msg=None):
         "region": region,
         "status_code": status_code,
         "body_preview": body_preview,
-        "owner": OWNER_mahim,
-        "made_by": MADE_BY_mahim,
+        "owner": OWNER_SIGNATURE,
+        "made_by": MADE_BY_SIGNATURE,
     }
     if error_msg:
         response_data["error"] = error_msg
@@ -390,13 +390,13 @@ def perform_emote_flow(jwt_token):
     success = resp.status_code == 200
     return build_response(success, region, resp.status_code, resp.content)
 
-@app.route('/mahim', methods=['GET'])
-def mahim_endpoint():
+@app.route('/rizer', methods=['GET'])
+def rizer_endpoint():
     if request.args.get('emote_enquip') is None:
         return jsonify({
             "error": "Missing 'emote_enquip' parameter",
-            "owner": OWNER_mahim,
-            "made_by": MADE_BY_mahim
+            "owner": OWNER_SIGNATURE,
+            "made_by": MADE_BY_SIGNATURE
         }), 400
 
     jwt_token = request.args.get('jwt_token')
@@ -411,16 +411,16 @@ def mahim_endpoint():
             return jsonify({
                 "success": False,
                 "error": f"Authentication failed: {error}",
-                "owner": OWNER_mahim,
-                "made_by": MADE_BY_mahim
-            }), >
+                "owner": OWNER_SIGNATURE,
+                "made_by": MADE_BY_SIGNATURE
+            }), 401
         login_result = major_login_with_retry(open_id, access_token)
         if not login_result:
             return jsonify({
                 "success": False,
                 "error": "MajorLogin failed after all platform attempts",
-                "owner": OWNER_mahim,
-                "made_by": MADE_BY_mahim
+                "owner": OWNER_SIGNATURE,
+                "made_by": MADE_BY_SIGNATURE
             }), 500
         jwt = login_result["token"]
         emote_response = perform_emote_flow(jwt)
@@ -438,16 +438,16 @@ def mahim_endpoint():
             return jsonify({
                 "success": False,
                 "error": f"Token inspect failed: {inspect_error}",
-                "owner": OWNER_mahim,
-                "made_by": MADE_BY_mahim
+                "owner": OWNER_SIGNATURE,
+                "made_by": MADE_BY_SIGNATURE
             }), 400
         login_result = major_login_with_retry(open_id, access_token)
         if not login_result:
             return jsonify({
                 "success": False,
                 "error": "MajorLogin failed after all platform attempts",
-                "owner": OWNER_mahim,
-                "made_by": MADE_BY_mahim
+                "owner": OWNER_SIGNATURE,
+                "made_by": MADE_BY_SIGNATURE
             }), 500
         jwt = login_result["token"]
         emote_response = perform_emote_flow(jwt)
@@ -460,21 +460,21 @@ def mahim_endpoint():
 
     return jsonify({
         "error": "Missing parameters. Provide jwt_token, uid+password, or access_token.",
-        "owner": OWNER_mahim,
-        "made_by": MADE_BY_mahim
+        "owner": OWNER_SIGNATURE,
+        "made_by": MADE_BY_SIGNATURE
     }), 400
 
 @app.route('/', methods=['GET'])
 def index():
     return jsonify({
-        "message": "mahim Emote equip API is and Fuhx FF Gay",
+        "message": "RIZER Emote equip API is and Fuhx FF Gay",
         "endpoints": {
-            "/mahim?emote_enquip&jwt_token=<JWT>": "Direct emote request",
-            "/mahim?emote_enquip&uid=<UID>&password=<PASS>": "Guest login + emote",
-            "/mahim?emote_enquip&access_token=<TOKEN>": "Access token login + emote"
+            "/rizer?emote_enquip&jwt_token=<JWT>": "Direct emote request",
+            "/rizer?emote_enquip&uid=<UID>&password=<PASS>": "Guest login + emote",
+            "/rizer?emote_enquip&access_token=<TOKEN>": "Access token login + emote"
         },
-        "owner": OWNER_mahim,
-        "made_by": MADE_BY_mahim
+        "owner": OWNER_SIGNATURE,
+        "made_by": MADE_BY_SIGNATURE
     })
 
 if __name__ == '__main__':
